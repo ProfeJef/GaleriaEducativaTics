@@ -6,16 +6,41 @@
 <title>Museo Virtual de Innovación Educativa</title>
 <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 <link rel="stylesheet" href="css/style.css">
-<!-- IMPORTANTE: data.js y components.js se cargan AQUÍ, en el <head>, -->
-<!-- para que los componentes existan ANTES de que el navegador parsee -->
-<!-- el <a-scene> de más abajo y trate de aplicarlos. -->
 <script src="js/data.js"></script>
 <script src="js/components.js"></script>
 </head>
 <body>
 
 <div id="loading">Cargando Museo Virtual de Innovación Educativa... 🎓</div>
+
+<!-- ================= PANTALLA DE INICIO ================= -->
+<!-- FIX: el clic en este botón es un gesto directo del usuario, lo que garantiza
+     que el navegador active el Pointer Lock de forma confiable (soluciona el bug
+     de "tener que mantener el clic sostenido para mirar"). -->
+<div id="startScreen">
+  <div id="startCard">
+    <h1>🏛️ Museo Virtual de Innovación Educativa</h1>
+    <p>Recorre 10 casos de innovación pedagógica nacional e internacional.</p>
+    <ul>
+      <li><strong>WASD / Flechas</strong> — caminar</li>
+      <li><strong>Mouse</strong> — mirar alrededor</li>
+      <li><strong>Clic en un cuadro</strong> — abrir su ficha</li>
+      <li><strong>V</strong> — cambiar cámara 1ª/3ª persona</li>
+      <li><strong>R</strong> — recentrar avatar</li>
+    </ul>
+    <button id="startBtn">Comenzar recorrido</button>
+  </div>
+</div>
+
 <div id="hint">WASD: caminar · Mouse: mirar · Clic: abrir cuadro · V: cámara 1ª/3ª · R: recentrar</div>
+
+<!-- ================= HUD DE PROGRESO ================= -->
+<div id="progressHud">Estaciones visitadas: <span id="progressCount">0</span>/10</div>
+
+<!-- ================= MINIMAPA ================= -->
+<div id="minimap">
+  <div id="minimapDot"></div>
+</div>
 
 <div id="modalOverlay">
   <div id="modalCard">
@@ -80,7 +105,6 @@
 
 </a-scene>
 
-<!-- main.js sí puede quedarse aquí abajo: usa DOMContentLoaded, no depende del orden de parseo -->
 <script src="js/main.js"></script>
 </body>
 </html>
