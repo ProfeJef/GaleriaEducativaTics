@@ -6,6 +6,11 @@
 <title>Museo Virtual de Innovación Educativa</title>
 <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 <link rel="stylesheet" href="css/style.css">
+<!-- IMPORTANTE: data.js y components.js se cargan AQUÍ, en el <head>, -->
+<!-- para que los componentes existan ANTES de que el navegador parsee -->
+<!-- el <a-scene> de más abajo y trate de aplicarlos. -->
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
 </head>
 <body>
 
@@ -29,11 +34,9 @@
   <a-plane rotation="90 0 0" width="8" height="42" position="0 8 0" color="#eceff1"></a-plane>
   <a-text value="MUSEO VIRTUAL DE INNOVACION EDUCATIVA" align="center" position="0 5 -19.5" width="14" color="#102a43"></a-text>
 
-  <!-- Las salas y estaciones se generan dinámicamente desde js/main.js usando js/data.js -->
   <a-entity id="roomNac" position="-19 0 0"></a-entity>
   <a-entity id="roomIntl" position="19 0 0"></a-entity>
 
-  <!-- ================= RIG UNIFICADO: wasd + look + bounds + pitch juntos ================= -->
   <a-entity id="rig" position="0 1.6 16"
             wasd-controls="acceleration:50"
             look-controls
@@ -49,7 +52,6 @@
     </a-camera>
   </a-entity>
 
-  <!-- ================= AVATAR DOCENTE (visible solo en 3ª persona) ================= -->
   <a-entity id="avatar" follow-player="target:#rig; cam:#playerCam" position="0 0 16" visible="false">
     <a-box position="0 1.05 0" width="0.46" height="0.62" depth="0.28" color="#2c3e6b" material="metalness:0.1; roughness:0.7" shadow="cast:true"></a-box>
     <a-box position="-0.2 1.05 0.13" width="0.1" height="0.6" depth="0.06" color="#1a2340" shadow="cast:true"></a-box>
@@ -78,8 +80,7 @@
 
 </a-scene>
 
-<script src="js/data.js"></script>
-<script src="js/components.js"></script>
+<!-- main.js sí puede quedarse aquí abajo: usa DOMContentLoaded, no depende del orden de parseo -->
 <script src="js/main.js"></script>
 </body>
 </html>
