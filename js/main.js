@@ -87,8 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
   buildRoom('#roomNac', LAYOUT_NAC);
   buildRoom('#roomIntl', LAYOUT_INTL);
 
-  document.querySelector('#avatarRig').setAttribute('body-walk', '');
-
   // ===== Sistema de logros / progreso =====
   const visited = new Set();
   window.onPlayerMove = function (pos) {
