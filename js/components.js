@@ -1,116 +1,114 @@
+// ============ Panel de galería (cuadro clicable) ============
 AFRAME.registerComponent('gallery-panel', {
   schema: { key: {type:'string'} },
   init: function () {
-    const s = STATIONS[this.data.key];
-    const zoneColor = s.zona === 'nac' ? '#43a047' : '#1e88e5';
-    const frameColor = '#e8b84b';
-    const bg = s.zona === 'nac' ? '#152018' : '#0d1e30';
+    const layout = this.data.key.startsWith('n') ? LAYOUT_NAC : LAYOUT_INTL;
+    const [,,,, thumb, label] = layout[this.data.key];
+    const frameColor = this.data.key.startsWith('n') ? '#2e7d32' : '#1565c0';
+
+    const bg = document.createElement('a-plane');
+    bg.setAttribute('width', 4.2); bg.setAttribute('height', 3.4);
+    bg.setAttribute('color', '#ffffff');
+    this.el.appendChild(bg);
 
     const frame = document.createElement('a-plane');
-    frame.setAttribute('width', 4.7); frame.setAttribute('height', 4.05);
-    frame.setAttribute('position', '0 0 -0.03');
-    frame.setAttribute('material', `color:${frameColor}; metalness:0.55; roughness:0.35`);
+    frame.setAttribute('width', 4.4); frame.setAttribute('height', 3.6);
+    frame.setAttribute('color', frameColor); frame.setAttribute('position', '0 0 -0.01');
     this.el.appendChild(frame);
 
-    const inner = document.createElement('a-plane');
-    inner.setAttribute('width', 4.35); inner.setAttribute('height', 3.72);
-    inner.setAttribute('position', '0 0 -0.02');
-    inner.setAttribute('color', bg);
-    this.el.appendChild(inner);
-
     const img = document.createElement('a-image');
-    img.setAttribute('src', s.img);
-    img.setAttribute('width', 3.9); img.setAttribute('height', 2.5);
-    img.setAttribute('position', '0 0.42 0.02');
+    img.setAttribute('src', thumb);
+    img.setAttribute('width', 3.8); img.setAttribute('height', 2.4);
+    img.setAttribute('position', '0 0.3 0.02');
     this.el.appendChild(img);
 
-    const label = document.createElement('a-text');
-    label.setAttribute('value', s.nombre.length > 34 ? s.nombre.slice(0,32)+'…' : s.nombre);
-    label.setAttribute('align', 'center');
-    label.setAttribute('position', '0 -1.38 0.02');
-    label.setAttribute('width', 4.6);
-    label.setAttribute('color', '#eef3f8');
-    this.el.appendChild(label);
+    const text = document.createElement('a-text');
+    text.setAttribute('value', label);
+    text.setAttribute('align', 'center');
+    text.setAttribute('position', '0 -1.2 0.03');
+    text.setAttribute('width', 4.5);
+    text.setAttribute('color', this.data.key.startsWith('n') ? '#1b3a1b' : '#0d2b4e');
+    this.el.appendChild(text);
 
-    const light = document.createElement('a-entity');
-    light.setAttribute('light', `type:spot; color:#fffde7; intensity:1.35; angle:38; penumbra:0.45`);
-    light.setAttribute('position', '0 2.6 2.6');
-    light.setAttribute('rotation', '-42 0 0');
-    this.el.appendChild(light);
-
-    const accent = document.createElement('a-plane');
-    accent.setAttribute('width', 4.7); accent.setAttribute('height', 0.08);
-    accent.setAttribute('position', '0 -2.02 -0.02');
-    accent.setAttribute('color', zoneColor);
-    this.el.appendChild(accent);
-
-    const hit = document.createElement('a-plane');
-    hit.setAttribute('width', 4.7); hit.setAttribute('height', 4.3);
-    hit.setAttribute('position', '0 0 0.1');
-    hit.setAttribute('material', 'opacity:0; transparent:true');
-    hit.setAttribute('class', 'clickable');
-    hit.addEventListener('click', () => window.openStation(this.data.key));
-    hit.addEventListener('mouseenter', () => this.el.setAttribute('animation__hover', 'property: scale; to: 1.06 1.06 1.06; dur: 180'));
-    hit.addEventListener('mouseleave', () => this.el.setAttribute('animation__hover', 'property: scale; to: 1 1 1; dur: 180'));
-    this.el.appendChild(hit);
+    this.el.setAttribute('class', 'clickable');
+    this.el.addEventListener('click', () => window.openStation(this.data.key));
+    this.el.addEventListener('mouseenter', () => this.el.setAttribute('scale', '1.08 1.08 1.08'));
+    this.el.addEventListener('mouseleave', () => this.el.setAttribute('scale', '1 1 1'));
   }
 });
 
-AFRAME.registerComponent('spin', {
-  schema: { speed:{default:20} },
-  tick: function (time, delta) {
-    this.el.object3D.rotation.y += THREE.MathUtils.degToRad(this.data.speed * delta / 1000);
+// ============ FIX 1: límites de colisión — no se puede salir del museo ============
+AFRAME.registerComponent('museum-bounds', {
+  schema: { minX:{default:-33}, maxX:{default:33}, minZ:{default:-19}, maxZ:{default:19} },
+  tick: function () {
+    const pos = this.el.object3D.position;
+    pos.x = THREE.MathUtils.clamp(pos.x, this.data.minX, this.data.maxX);
+    pos.z = THREE.MathUtils.clamp(pos.z, this.data.minZ, this.data.maxZ);
   }
 });
 
-/*
-  FIX ESTRUCTURAL DEL BUG DE CÁMARA:
-  wasd-controls y look-controls ahora viven JUNTOS en #playerCam.
-  Este componente hace que el cuerpo visible del docente (#avatarBody)
-  SIGA a la cámara en cada frame (posición X/Z + rotación Y), en vez de
-  intentar que la cámara siga al cuerpo. Es la relación correcta en A-Frame.
-  Tecla "R" fuerza un recentrado instantáneo sin animación, por si el
-  usuario nota cualquier desfase visual tras teletransportes o colisiones.
-*/
-AFRAME.registerComponent('teacher-follow', {
-  schema: { cam: {type:'selector'} },
+// ============ FIX 2: límite de inclinación vertical — evita el "bug" al mirar al piso ============
+AFRAME.registerComponent('pitch-limit', {
+  schema: { max:{default:75} },
+  tick: function () {
+    const cam = this.el.object3D;
+    const maxRad = THREE.MathUtils.degToRad(this.data.max);
+    cam.rotation.x = THREE.MathUtils.clamp(cam.rotation.x, -maxRad, maxRad);
+  }
+});
+
+// ============ FIX 3: avatar docente 1ª/3ª persona (V) + recentrado (R) ============
+AFRAME.registerComponent('follow-player', {
+  schema: { target: {type:'selector'}, cam: {type:'selector'} },
   init: function () {
     this.last = new THREE.Vector3();
     this.t = 0;
+    this.thirdPerson = false;
     window.addEventListener('keydown', (e) => {
-      if (e.key.toLowerCase() === 'r') this.snap = true;
+      const k = e.key.toLowerCase();
+      if (k === 'r') this.snap = true;
+      if (k === 'v') this.toggleView();
     });
   },
-  tick: function (time, delta) {
-    if (!this.data.cam) return;
-    const camPos = this.data.cam.object3D.getWorldPosition(new THREE.Vector3());
-    const camYaw = this.data.cam.object3D.rotation.y;
-
-    if (this.snap) {
-      this.el.object3D.position.set(camPos.x, 0, camPos.z);
-      this.el.object3D.rotation.y = camYaw;
-      this.snap = false;
-      if (window.showToast) window.showToast('📍 Cámara y docente recentrados');
+  toggleView: function () {
+    this.thirdPerson = !this.thirdPerson;
+    const camObj = this.data.cam.object3D;
+    if (this.thirdPerson) {
+      camObj.position.set(0, 1.0, 2.8);
+      camObj.rotation.x = THREE.MathUtils.degToRad(-12);
     } else {
-      this.el.object3D.position.x = camPos.x;
-      this.el.object3D.position.z = camPos.z;
-      this.el.object3D.rotation.y = camYaw;
+      camObj.position.set(0, 0, 0);
+      camObj.rotation.x = 0;
     }
+  },
+  tick: function (time, delta) {
+    if (!this.data.target) return;
+    const tPos = this.data.target.object3D.position;
+    this.el.object3D.position.set(tPos.x, 0, tPos.z);
+    this.el.object3D.rotation.y = this.data.target.object3D.rotation.y;
+    this.el.setAttribute('visible', this.thirdPerson);
 
-    const pos = this.el.object3D.position;
-    const dist = pos.distanceTo(this.last);
-    this.last.copy(pos);
+    const dist = tPos.distanceTo(this.last);
+    this.last.copy(tPos);
     const moving = dist > 0.0006;
-
     this.t += moving ? delta * 0.016 : 0;
-    const swing = moving ? Math.sin(this.t * 6) * 22 : 0;
+    const swing = moving ? Math.sin(this.t * 6) * 25 : 0;
     const legL = this.el.querySelector('#legL'), legR = this.el.querySelector('#legR');
     const armL = this.el.querySelector('#armL'), armR = this.el.querySelector('#armR');
     if (legL) legL.object3D.rotation.x = THREE.MathUtils.degToRad(swing);
     if (legR) legR.object3D.rotation.x = THREE.MathUtils.degToRad(-swing);
-    if (armL) armL.object3D.rotation.x = THREE.MathUtils.degToRad(-swing * 0.6);
-    if (armR) armR.object3D.rotation.x = THREE.MathUtils.degToRad(swing * 0.6);
-
-    if (window.onPlayerMove) window.onPlayerMove(pos);
+    if (armL) armL.object3D.rotation.x = THREE.MathUtils.degToRad(-swing * 0.7);
+    if (armR) armR.object3D.rotation.x = THREE.MathUtils.degToRad(swing * 0.7);
   }
 });
+
+// ============ FIX 4: congela/descongela cámara y movimiento al abrir/cerrar el modal ============
+window.freezeCamera = function () {
+  const rig = document.querySelector('#rig');
+  if (rig) { rig.setAttribute('wasd-controls', 'enabled', false); rig.setAttribute('look-controls', 'enabled', false); }
+  if (document.exitPointerLock) document.exitPointerLock();
+};
+window.unfreezeCamera = function () {
+  const rig = document.querySelector('#rig');
+  if (rig) { rig.setAttribute('wasd-controls', 'enabled', true); rig.setAttribute('look-controls', 'enabled', true); }
+};
