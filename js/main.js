@@ -103,6 +103,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('startScreen').style.display = 'none';
   });
 
+  // ================= FIX: reactiva el Pointer Lock si se perdió =================
+  // Se pierde automáticamente al abrir un modal (freezeCamera llama a
+  // exitPointerLock) o al presionar Escape. Sin esto, look-controls se queda
+  // atascado en modo de arrastre con clic sostenido y no se recupera solo.
+  const canvasEl = document.querySelector('a-scene').canvas;
+  document.addEventListener('click', () => {
+    const modalOpen = document.getElementById('modalOverlay').style.display === 'flex';
+    const startOpen = document.getElementById('startScreen').style.display !== 'none';
+    if (!modalOpen && !startOpen && canvasEl && document.pointerLockElement !== canvasEl && canvasEl.requestPointerLock) {
+      canvasEl.requestPointerLock();
+    }
+  });
+
   const rig = document.querySelector('#rig');
 
   const dot = document.getElementById('minimapDot');
