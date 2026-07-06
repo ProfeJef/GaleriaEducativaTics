@@ -41,28 +41,12 @@ AFRAME.registerComponent('gallery-panel', {
   }
 });
 
-// ============ FIX: límites de colisión reforzados — cubren pasillo + ambas salas completas ============
 AFRAME.registerComponent('museum-bounds', {
-  schema: {
-    corridorMinX:{default:-3.8}, corridorMaxX:{default:3.8},
-    minZ:{default:-19.3}, maxZ:{default:19.3},
-    roomMinX:{default:-33.5}, roomMaxX:{default:33.5}
-  },
+  schema: { minZ:{default:-19.3}, maxZ:{default:19.3}, roomMinX:{default:-33.5}, roomMaxX:{default:33.5} },
   tick: function () {
     const pos = this.el.object3D.position;
-    // Siempre se respeta el límite total de X (paredes exteriores de ambas salas)
     pos.x = THREE.MathUtils.clamp(pos.x, this.data.roomMinX, this.data.roomMaxX);
-    // Siempre se respeta el límite de Z (paredes frontal/trasera)
     pos.z = THREE.MathUtils.clamp(pos.z, this.data.minZ, this.data.maxZ);
-  }
-});
-
-AFRAME.registerComponent('pitch-limit', {
-  schema: { max:{default:75} },
-  tick: function () {
-    const cam = this.el.object3D;
-    const maxRad = THREE.MathUtils.degToRad(this.data.max);
-    cam.rotation.x = THREE.MathUtils.clamp(cam.rotation.x, -maxRad, maxRad);
   }
 });
 
