@@ -129,5 +129,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!modalOpen && !startOpen && document.pointerLockElement !== canvasEl && canvasEl.requestPointerLock) {
       canvasEl.requestPointerLock();
     }
+  const debugHud = document.getElementById('debugHud');
+  function updateDebug() {
+    if (rig && debugHud) {
+      const p = rig.object3D.position;
+      const r = rig.object3D.rotation;
+      const cam = document.querySelector('#playerCam');
+      const camR = cam ? cam.object3D.rotation : {x:0,y:0,z:0};
+      debugHud.textContent =
+        `rig pos: x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} z=${p.z.toFixed(1)} | ` +
+        `rig rotY=${THREE.MathUtils.radToDeg(r.y).toFixed(1)}° | ` +
+        `cam pitch=${THREE.MathUtils.radToDeg(camR.x).toFixed(1)}°`;
+    }
+    requestAnimationFrame(updateDebug);
+  }
+  updateDebug();
   });
 });
