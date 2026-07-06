@@ -2,14 +2,12 @@
 body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; overflow: hidden; }
 a-scene { width:100%; height:100vh; }
 
-/* ================= PANTALLA DE CARGA ================= */
 #loading {
   position:fixed; top:0; left:0; width:100%; height:100%;
   background:linear-gradient(135deg,#0a1a2f,#1b3a1b); color:white;
   display:flex; align-items:center; justify-content:center; font-size:1.5em; z-index:999;
 }
 
-/* ================= PANTALLA DE INICIO ================= */
 #startScreen {
   position:fixed; top:0; left:0; width:100%; height:100%;
   background:linear-gradient(135deg,#0a1a2f,#1b3a1b); color:white;
@@ -27,20 +25,17 @@ a-scene { width:100%; height:100vh; }
 }
 #startBtn:hover { transform:scale(1.05); }
 
-/* ================= HINT DE CONTROLES ================= */
 #hint {
   position:fixed; bottom:14px; left:50%; transform:translateX(-50%);
   background:rgba(0,0,0,0.75); color:#fff; padding:8px 18px; border-radius:20px;
   font-size:14px; z-index:50; pointer-events:none;
 }
 
-/* ================= HUD DE PROGRESO ================= */
 #progressHud {
   position:fixed; top:14px; left:14px; background:rgba(0,0,0,0.65); color:#ffd54f;
   padding:8px 16px; border-radius:14px; font-size:14px; font-weight:600; z-index:50;
 }
 
-/* ================= MINIMAPA ================= */
 #minimap {
   position:fixed; top:14px; right:14px; width:130px; height:80px;
   background:rgba(255,255,255,0.85); border:2px solid #102a43; border-radius:8px; z-index:50;
@@ -50,7 +45,6 @@ a-scene { width:100%; height:100vh; }
   transform:translate(-50%,-50%);
 }
 
-/* ================= MODAL DE INFORMACIÓN ================= */
 #modalOverlay {
   position:fixed; top:0; left:0; width:100%; height:100%;
   background:rgba(5,15,30,0.8); display:none; align-items:center; justify-content:center;
