@@ -8,7 +8,6 @@ const STATIONS = {
     tics:'Laboratorios virtuales, tabletas con software interactivo sin necesidad de conectividad permanente y kits de robótica educativa de bajo costo.',
     aportes:'Democratización del acceso tecnológico mediante contenidos regionales precargados para superar barreras de conectividad, reduciendo la dependencia de internet constante.',
     evidencia:'Computadores para Educar ha entregado más de 9 millones de terminales tecnológicas desde su creación, impactando miles de sedes educativas oficiales en todo el país.' },
-
   n2: { zona:'nac', nombre:'2. Escuela Nueva Activa - Innovación Rural',
     img:'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800',
     contexto:'Aulas multigrado en zonas rurales dispersas de difícil acceso geográfico, donde un mismo docente atiende simultáneamente varios grados en un solo salón.',
@@ -17,8 +16,7 @@ const STATIONS = {
     metodologia:'Aprendizaje Cooperativo Adaptativo respaldado por guías de autoaprendizaje contextualizadas que permiten avanzar de forma autónoma mientras el docente atiende a otros grupos.',
     tics:'Plataformas móviles de seguimiento comunitario, recursos educativos digitales en audio (podcasts didácticos) y terminales con carga solar para zonas sin red eléctrica estable.',
     aportes:'Flexibilidad absoluta del calendario escolar para asimilar los ciclos agrícolas de la región sin penalizar la permanencia del estudiante ni su promoción académica.',
-    evidencia:'Modelo reconocido internacionalmente como una de las innovaciones educativas más replicadas en América Latina y África, avalado por el Banco Mundial como una de las diez innovaciones que cambiaron el mundo de la educación.' },
-
+    evidencia:'Modelo reconocido internacionalmente como una de las innovaciones educativas más replicadas en América Latina y África, avalado por el Banco Mundial.' },
   n3: { zona:'nac', nombre:'3. Ruta STEM+A - Tecnoacademias SENA',
     img:'https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=800',
     contexto:'Educación media técnica formal articulada con centros avanzados de desarrollo tecnológico del SENA, permitiendo doble titulación entre bachillerato y formación técnica.',
@@ -28,7 +26,6 @@ const STATIONS = {
     tics:'Modelado e impresión 3D, entornos virtuales de simulación de circuitos electrónicos, programación estructurada/bloques e inteligencia artificial para análisis de datos.',
     aportes:'Espacios de co-creación entre estudiantes de secundaria e investigadores técnicos para formular patentes y prototipos funcionales con aplicación local inmediata.',
     evidencia:'La red de Tecnoacademias del SENA cuenta con presencia en más de 30 departamentos, vinculando miles de jóvenes anualmente a procesos de innovación tecnológica temprana.' },
-
   n4: { zona:'nac', nombre:'4. Aulas en Paz - Convivencia Digital',
     img:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800',
     contexto:'Instituciones educativas vulnerables o afectadas por dinámicas complejas de convivencia social, incluyendo contextos de posconflicto y violencia urbana.',
@@ -37,8 +34,7 @@ const STATIONS = {
     metodologia:'Juego de Roles (Role-playing) y debates guiados basados en dilemas morales auténticos de la cotidianidad escolar y comunitaria de los estudiantes.',
     tics:'Videojuegos serios (simuladores interactivos de toma de decisiones), narrativas transmedia y foros digitales de mediación escolar moderados por pares capacitados.',
     aportes:'Integración orgánica de la salud mental y la empatía dentro del currículo académico estándar usando métricas de seguimiento digital del clima escolar.',
-    evidencia:'Programa avalado por la Universidad de los Andes con evaluaciones de impacto que muestran reducción medible en comportamientos agresivos y mejora en habilidades de convivencia.' },
-
+    evidencia:'Programa avalado por la Universidad de los Andes con evaluaciones de impacto que muestran reducción medible en comportamientos agresivos.' },
   n5: { zona:'nac', nombre:'5. Territorios Creativos - Computadores para Educar Innova',
     img:'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800',
     contexto:'Instituciones educativas de carácter étnico e intercultural en regiones de alta diversidad cultural, incluyendo resguardos indígenas y territorios afrodescendientes.',
@@ -46,9 +42,8 @@ const STATIONS = {
     enfoque:'Etnoeducación activa e interculturalidad crítica fundamentada, donde la tecnología se subordina al saber ancestral en lugar de reemplazarlo.',
     metodologia:'Aprendizaje Basado en la Indagación coordinado con ejercicios de cartografía social comunitaria que documentan el territorio desde la perspectiva de sus habitantes.',
     tics:'Herramientas digitales de traducción para lenguas nativas desarrolladas en clase, producción audiovisual para el rescate oral y sistemas de información geográfica (SIG) comunitarios.',
-    aportes:'Fusión de saberes y tradiciones ancestrales con herramientas tecnológicas modernas para asegurar la preservación de la identidad cultural frente a la homogenización digital.',
+    aportes:'Fusión de saberes y tradiciones ancestrales con herramientas tecnológicas modernas para asegurar la preservación de la identidad cultural.',
     evidencia:'Iniciativa reconocida por el Ministerio de Educación como modelo de apropiación tecnológica con enfoque diferencial étnico, replicada en más de 15 comunidades.' },
-
   i1: { zona:'intl', nombre:'6. Modelo Fenómeno (Phenomenon-Based Learning) — Finlandia',
     img:'https://images.unsplash.com/photo-1544717305-2782549b5136?w=800',
     contexto:'Sistema educativo nacional público descentralizado, enfocado en equidad social, con una de las tasas más bajas de desigualdad educativa entre escuelas del mundo.',
@@ -57,8 +52,7 @@ const STATIONS = {
     metodologia:'Aprendizaje Basado en Fenómenos, suprimiendo las divisiones rígidas de las asignaturas tradicionales durante periodos definidos del calendario escolar.',
     tics:'Entornos virtuales de aprendizaje integrados (LMS), aplicaciones de co-diseño digital y portafolios interactivos en la nube compartidos entre docentes de distintas áreas.',
     aportes:'Abordaje de problemáticas globales (v.g., cambio climático) movilizando simultáneamente conceptos de geografía, química, economía e historia en un solo proyecto.',
-    evidencia:'Finlandia ha mantenido consistentemente resultados destacados en pruebas PISA con una de las brechas de desempeño más bajas entre estudiantes de distinto origen socioeconómico.' },
-
+    evidencia:'Finlandia ha mantenido consistentemente resultados destacados en pruebas PISA con una de las brechas de desempeño más bajas entre estudiantes.' },
   i2: { zona:'intl', nombre:'7. High Tech High — San Diego, Estados Unidos',
     img:'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800',
     contexto:'Red de escuelas públicas charter de alta diversidad, pionera en el diseño curricular alternativo desde su fundación en el año 2000.',
@@ -67,8 +61,7 @@ const STATIONS = {
     metodologia:'Aprendizaje Basado en Proyectos (ABP) de largo alcance que culminan obligatoriamente en exposiciones comunitarias abiertas a familias y expertos externos.',
     tics:'Software de diseño arquitectónico y modelado CAD, herramientas colaborativas de gestión de proyectos (Trello, Asana) y suites multimedia para documentar el proceso.',
     aportes:'Sustitución de exámenes estandarizados por defensas públicas de portafolios ante expertos e infraestructura escolar de planta abierta sin muros entre aulas.',
-    evidencia:'Sus graduados acceden a educación superior en tasas superiores al promedio nacional estadounidense, siendo un referente citado en investigaciones de Edutopia y la Fundación George Lucas.' },
-
+    evidencia:'Sus graduados acceden a educación superior en tasas superiores al promedio nacional estadounidense, referente citado por Edutopia.' },
   i3: { zona:'intl', nombre:'8. Movimiento Maker — Tinkering Studio (Exploratorium)',
     img:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800',
     contexto:'Red global de espacios de aprendizaje no formal y laboratorios escolares de experimentación activa, inspirados en el Exploratorium de San Francisco.',
@@ -76,19 +69,17 @@ const STATIONS = {
     enfoque:'Construccionismo pedagógico puro enfocado en el aprendizaje mediante el diseño y el ensayo-error, inspirado en las ideas de Seymour Papert.',
     metodologia:'Tinkering (pensar con las manos) combinando arte, ciencia y tecnología lúdica sin una respuesta correcta predefinida desde el inicio del ejercicio.',
     tics:'Microcontroladores de hardware libre (Arduino, Makey Makey), sensores ambientales de código abierto y maquinaria de fabricación digital como cortadoras láser.',
-    aportes:'Reencuadre del error escolar como un proceso iterativo normalizado, eliminando la frustración mediante el rediseño continuo en lugar de la calificación punitiva.',
+    aportes:'Reencuadre del error escolar como un proceso iterativo normalizado, eliminando la frustración mediante el rediseño continuo.',
     evidencia:'El modelo del Exploratorium ha sido documentado y adoptado por cientos de museos de ciencia y makerspaces escolares en más de 20 países.' },
-
   i4: { zona:'intl', nombre:'9. Aulas Inteligentes — Singapur (Smart Nation)',
     img:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800',
     contexto:'Escuelas hiperconectadas de alto rendimiento técnico bajo la política institucional "Thinking Schools, Learning Nation", parte de la estrategia nacional Smart Nation.',
     poblacion:'Todo el sistema educativo público de Singapur, desde primaria hasta educación preuniversitaria.',
     enfoque:'Desarrollo sistemático del pensamiento computacional y habilidades metacognitivas superiores, integrado desde los primeros grados escolares.',
-    metodologia:'Resolución de problemas complejos estructurada sobre la progresión metodológica Concreto-Pictórico-Abstracto (CPA), originaria del método Singapur de matemáticas.',
+    metodologia:'Resolución de problemas complejos estructurada sobre la progresión metodológica Concreto-Pictórico-Abstracto (CPA), originaria del método Singapur.',
     tics:'Tutores inteligentes basados en IA adaptativa, analíticas de aprendizaje masivas en tiempo real y entornos inmersivos de realidad aumentada para ciencias.',
-    aportes:'Plataformas adaptativas que modifican la complejidad del problema en tiempo real por estudiante, facilitando la intervención oportuna y personalizada del maestro.',
+    aportes:'Plataformas adaptativas que modifican la complejidad del problema en tiempo real por estudiante, facilitando la intervención oportuna del maestro.',
     evidencia:'Singapur ocupa consistentemente los primeros lugares en pruebas internacionales TIMSS y PISA en matemáticas y ciencias desde hace más de dos décadas.' },
-
   i5: { zona:'intl', nombre:'10. Red Global de Aprendizaje (NPDL) — Michael Fullan',
     img:'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800',
     contexto:'Asociación internacional de centros escolares orientada a la transformación profunda de las prácticas de enseñanza, liderada por el investigador canadiense Michael Fullan.',
@@ -96,11 +87,10 @@ const STATIONS = {
     enfoque:'Marco de las "6 Cs": Carácter, Ciudadanía, Colaboración, Comunicación, Creatividad y Pensamiento Crítico como ejes transversales del currículo.',
     metodologia:'Aprendizaje Profundo (Deep Learning) catalizado por alianzas de impacto con el entorno social circundante, midiendo competencias más allá del contenido académico.',
     tics:'Redes globales de comunicación escolar, plataformas para videoconferencias de co-diseño multinacional y rúbricas de evaluación compartidas en la nube.',
-    aportes:'Evaluación sistémica del progreso educativo mediante un tejido de rúbricas interconectadas a nivel mundial en diversos continentes, permitiendo comparabilidad entre culturas distintas.',
+    aportes:'Evaluación sistémica del progreso educativo mediante un tejido de rúbricas interconectadas a nivel mundial en diversos continentes.',
     evidencia:'La Red Global de Aprendizaje (NPDL) documenta su impacto en publicaciones académicas de Fullan como "Deep Learning: Engage the World, Change the World" (2018).' }
 };
 
-// Posiciones dentro de cada sala: [x, y, z, rotY, imgThumb, etiqueta corta]
 const LAYOUT_NAC = {
   n1: [-14.8, 2.8, -12, 90,  'https://images.unsplash.com/photo-1568658176307-e730ceea3576?w=500', '1. Computadores para Educar'],
   n2: [-14.8, 2.8, -1,  90,  'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=500', '2. Escuela Nueva Activa'],
